@@ -592,6 +592,8 @@ const (
 type CanaryStep struct {
 	// SetWeight sets what percentage of the newRS should receive
 	SetWeight *int32 `json:"setWeight,omitempty" protobuf:"varint,1,opt,name=setWeight"`
+	// MaxWeight sets what is the max weight of the traffic, the newRS will receive SetWeight/MaxWeight traffic
+	MaxWeight *int32 `json:"maxWeight,omitempty" protobuf:"varint,2,opt,name=maxWeight"`
 	// Pause freezes the rollout by setting spec.Paused to true.
 	// A Rollout will resume when spec.Paused is reset to false.
 	// +optional
