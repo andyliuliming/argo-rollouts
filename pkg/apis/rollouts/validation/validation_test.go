@@ -238,7 +238,7 @@ func TestValidateRolloutStrategyCanary(t *testing.T) {
 		invalidRo := ro.DeepCopy()
 		invalidRo.Spec.Strategy.Canary.Steps[0].SetWeight = &setWeight
 		allErrs := ValidateRolloutStrategyCanary(invalidRo, field.NewPath(""))
-		assert.Equal(t, InvalidSetWeightMessage, allErrs[0].Detail)
+		assert.Equal(t, fmt.Sprintf(InvalidSetWeightMessage, DefaultMaxWeight), allErrs[0].Detail)
 	})
 
 	t.Run("invalid duration set in paused step", func(t *testing.T) {
