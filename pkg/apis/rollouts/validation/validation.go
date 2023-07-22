@@ -20,7 +20,6 @@ import (
 
 	"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1"
 	"github.com/argoproj/argo-rollouts/utils/defaults"
-	"github.com/argoproj/argo-rollouts/utils/weightutil"
 )
 
 const (
@@ -316,10 +315,8 @@ func ValidateRolloutStrategyCanary(rollout *v1alpha1.Rollout, fldPath *field.Pat
 			allErrs = append(allErrs, field.Invalid(stepFldPath, errVal, InvalidStepMessage))
 		}
 
-		maxTrafficWeight := weightutil.MaxTrafficWeight(rollout)
-
-		if step.SetWeight != nil && (*step.SetWeight < 0 || *step.SetWeight > maxTrafficWeight) {
-			allErrs = append(allErrs, field.Invalid(stepFldPath.Child("setWeight"), *canary.Steps[i].SetWeight, fmt.Sprintf(InvalidSetWeightMessage, maxTrafficWeight)))
+		if step.SetWeight != nil && (*step.SetWeight < 0 || *step.SetWeight > DefaultMaxWeight) {
+			allErrs = append(allErrs, field.Invalid(stepFldPath.Child("setWeight"), *canary.Steps[i].SetWeight, fmt.Sprintf(InvalidSetWeightMessage, DefaultMaxWeight)))
 		}
 		if step.Pause != nil && step.Pause.DurationSeconds() < 0 {
 			allErrs = append(allErrs, field.Invalid(stepFldPath.Child("pause").Child("duration"), step.Pause.DurationSeconds(), InvalidDurationMessage))
