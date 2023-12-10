@@ -20,6 +20,7 @@ import (
 
 	"github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1"
 	"github.com/argoproj/argo-rollouts/utils/defaults"
+	"github.com/argoproj/argo-rollouts/utils/weightutil"
 )
 
 const (
@@ -27,8 +28,8 @@ const (
 
 	// MissingFieldMessage the message to indicate rollout is missing a field
 	MissingFieldMessage = "Rollout has missing field '%s'"
-	// InvalidSetWeightMessage indicates the setweight value needs to be between 0 and 100
-	InvalidSetWeightMessage = "SetWeight needs to be between 0 and 100"
+	// InvalidSetWeightMessage indicates the setweight value needs to be between 0 and max weight
+	InvalidSetWeightMessage = "SetWeight needs to be between 0 and %d"
 	// InvalidCanaryExperimentTemplateWeightWithoutTrafficRouting indicates experiment weight cannot be set without trafficRouting
 	InvalidCanaryExperimentTemplateWeightWithoutTrafficRouting = "Experiment template weight cannot be set unless TrafficRouting is enabled"
 	// InvalidSetCanaryScaleTrafficPolicy indicates that TrafficRouting, required for SetCanaryScale, is missing
@@ -292,8 +293,11 @@ func ValidateRolloutStrategyCanary(rollout *v1alpha1.Rollout, fldPath *field.Pat
 				step.Experiment == nil, step.Pause == nil, step.SetWeight == nil, step.Analysis == nil, step.SetCanaryScale == nil, step.SetHeaderRoute == nil, step.SetMirrorRoute == nil)
 			allErrs = append(allErrs, field.Invalid(stepFldPath, errVal, InvalidStepMessage))
 		}
-		if step.SetWeight != nil && (*step.SetWeight < 0 || *step.SetWeight > 100) {
-			allErrs = append(allErrs, field.Invalid(stepFldPath.Child("setWeight"), *canary.Steps[i].SetWeight, InvalidSetWeightMessage))
+
+		maxTrafficWeight := weightutil.MaxTrafficWeight(rollout)
+
+		if step.SetWeight != nil && (*step.SetWeight < 0 || *step.SetWeight > maxTrafficWeight) {
+			allErrs = append(allErrs, field.Invalid(stepFldPath.Child("setWeight"), *canary.Steps[i].SetWeight, fmt.Sprintf(InvalidSetWeightMessage, maxTrafficWeight)))
 		}
 		if step.Pause != nil && step.Pause.DurationSeconds() < 0 {
 			allErrs = append(allErrs, field.Invalid(stepFldPath.Child("pause").Child("duration"), step.Pause.DurationSeconds(), InvalidDurationMessage))
