@@ -63,6 +63,7 @@ func NewRolloutInfo(
 			if ro.Spec.Strategy.Canary.TrafficRouting == nil {
 				for _, rs := range roInfo.ReplicaSets {
 					if rs.Canary {
+						// use the max traffic weight in the spec instead of 100
 						roInfo.ActualWeight = fmt.Sprintf("%d", (rs.Available*100)/ro.Status.AvailableReplicas)
 					}
 				}

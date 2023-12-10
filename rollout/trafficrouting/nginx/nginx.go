@@ -208,7 +208,10 @@ func (r *Reconciler) buildLegacyCanaryIngress(stableIngress *extensionsv1beta1.I
 	// Always set `canary` and `canary-weight` - `canary-by-header` and `canary-by-cookie`, if set,  will always take precedence
 	desiredCanaryIngress.Annotations[fmt.Sprintf("%s/canary", annotationPrefix)] = "true"
 	desiredCanaryIngress.Annotations[fmt.Sprintf("%s/canary-weight", annotationPrefix)] = fmt.Sprintf("%d", desiredWeight)
-
+	if r.cfg.Rollout.Spec.Strategy.Canary.TrafficRouting.MaxTrafficWeight != nil {
+		weightTotal := *r.cfg.Rollout.Spec.Strategy.Canary.TrafficRouting.MaxTrafficWeight
+		desiredCanaryIngress.Annotations[fmt.Sprintf("%s/canary-weight-total", annotationPrefix)] = fmt.Sprintf("%d", weightTotal)
+	}
 	return ingressutil.NewLegacyIngress(desiredCanaryIngress), nil
 }
 
