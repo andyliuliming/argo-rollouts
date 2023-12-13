@@ -73,6 +73,8 @@ const (
 	InvalidCanaryDynamicStableScale = "Canary dynamicStableScale can only be used with traffic routing"
 	// InvalidCanaryDynamicStableScaleWithScaleDownDelay indicates that canary.dynamicStableScale cannot be used with scaleDownDelaySeconds
 	InvalidCanaryDynamicStableScaleWithScaleDownDelay = "Canary dynamicStableScale cannot be used with scaleDownDelaySeconds"
+	// InvalidCanaryMaxWeightOnlySupportInNginxAndPlugins indicates that canary.maxTrafficWeight cannot be used
+	InvalidCanaryMaxWeightOnlySupportInNginxAndPlugins = "Canary maxTrafficWeight in traffic routing only support in Nginx and Plugins"
 	// InvalidPingPongProvidedMessage indicates that both ping and pong service must be set to use Ping-Pong feature
 	InvalidPingPongProvidedMessage = "Ping service and Pong service must to be set to use Ping-Pong feature"
 	// DuplicatedPingPongServicesMessage indicates that the rollout uses the same service for the ping and pong services
@@ -281,6 +283,12 @@ func ValidateRolloutStrategyCanary(rollout *v1alpha1.Rollout, fldPath *field.Pat
 	} else {
 		if canary.ScaleDownDelaySeconds != nil && canary.DynamicStableScale {
 			allErrs = append(allErrs, field.Invalid(fldPath.Child("dynamicStableScale"), canary.DynamicStableScale, InvalidCanaryDynamicStableScaleWithScaleDownDelay))
+		}
+		// only the nginx and plugin have this support for now
+		if canary.TrafficRouting.MaxTrafficWeight != nil {
+			if canary.TrafficRouting.Nginx == nil && len(canary.TrafficRouting.Plugins) == 0 {
+				allErrs = append(allErrs, field.Invalid(fldPath.Child("trafficRouting").Child("maxTrafficWeight"), canary.TrafficRouting.MaxTrafficWeight, InvalidCanaryMaxWeightOnlySupportInNginxAndPlugins))
+			}
 		}
 	}
 
