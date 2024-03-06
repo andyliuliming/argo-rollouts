@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.1">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
     
     
       
@@ -26,7 +26,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.45e1311d.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e359304.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -346,10 +346,8 @@
     
     
     
-    
     <li class="md-nav__item md-nav__item--nested">
       
-        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
@@ -578,10 +576,8 @@
     
     
     
-    
     <li class="md-nav__item md-nav__item--nested">
       
-        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
@@ -615,10 +611,8 @@
     
     
     
-    
     <li class="md-nav__item md-nav__item--nested">
       
-        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
@@ -940,10 +934,8 @@
     
     
     
-    
     <li class="md-nav__item md-nav__item--nested">
       
-        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
@@ -1215,10 +1207,8 @@
     
     
     
-    
     <li class="md-nav__item md-nav__item--nested">
       
-        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
@@ -1554,10 +1544,8 @@
     
     
     
-    
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
-        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
@@ -1614,10 +1602,8 @@
     
     
     
-    
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
-        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11_2" checked>
@@ -1862,7 +1848,7 @@
         
   
   <span class="md-ellipsis">
-    Pagerduty
+    PagerDuty
   </span>
   
 
@@ -2081,6 +2067,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#retry-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retry Behavior
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
       Configuration
@@ -2102,7 +2097,7 @@
           <li class="md-nav__item">
   <a href="#set-github-commit-status" class="md-nav__link">
     <span class="md-ellipsis">
-      Set Github commit status
+      Set GitHub commit status
     </span>
   </a>
   
@@ -2174,10 +2169,8 @@
     
     
     
-    
     <li class="md-nav__item md-nav__item--nested">
       
-        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
@@ -2232,10 +2225,8 @@
     
     
     
-    
     <li class="md-nav__item md-nav__item--nested">
       
-        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12_2" >
@@ -3058,10 +3049,8 @@
     
     
     
-    
     <li class="md-nav__item md-nav__item--nested">
       
-        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
@@ -3164,10 +3153,8 @@
     
     
     
-    
     <li class="md-nav__item md-nav__item--nested">
       
-        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" >
@@ -3378,6 +3365,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#retry-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retry Behavior
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
       Configuration
@@ -3399,7 +3395,7 @@
           <li class="md-nav__item">
   <a href="#set-github-commit-status" class="md-nav__link">
     <span class="md-ellipsis">
-      Set Github commit status
+      Set GitHub commit status
     </span>
   </a>
   
@@ -3457,22 +3453,28 @@
 
 <h1 id="webhook">Webhook<a class="headerlink" href="#webhook" title="Permanent link">&para;</a></h1>
 <p>The webhook notification service allows sending a generic HTTP request using the templatized request body and URL.
-Using Webhook you might trigger a Jenkins job, update Github commit status.</p>
+Using Webhook you might trigger a Jenkins job, update GitHub commit status.</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <p>The Webhook notification service configuration includes following settings:</p>
 <ul>
 <li><code>url</code> - the url to send the webhook to</li>
 <li><code>headers</code> - optional, the headers to pass along with the webhook</li>
-<li><code>basicAuth</code> - optional, the basic authentication to pass along with the webook</li>
+<li><code>basicAuth</code> - optional, the basic authentication to pass along with the webhook</li>
 <li><code>insecureSkipVerify</code> - optional bool, true or false</li>
+<li><code>retryWaitMin</code> - Optional, the minimum wait time between retries. Default value: 1s.</li>
+<li><code>retryWaitMax</code> - Optional, the maximum wait time between retries. Default value: 5s.</li>
+<li><code>retryMax</code> - Optional, the maximum number of retries. Default value: 3.</li>
 </ul>
+<h2 id="retry-behavior">Retry Behavior<a class="headerlink" href="#retry-behavior" title="Permanent link">&para;</a></h2>
+<p>The webhook service will automatically retry the request if it fails due to network errors or if the server returns a 5xx status code. The number of retries and the wait time between retries can be configured using the <code>retryMax</code>, <code>retryWaitMin</code>, and <code>retryWaitMax</code> parameters.</p>
+<p>The wait time between retries is between <code>retryWaitMin</code> and <code>retryWaitMax</code>. If all retries fail, the <code>Send</code> method will return an error.</p>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <p>Use the following steps to configure webhook:</p>
-<p>1 Register webhook in <code>argocd-notifications-cm</code> ConfigMap:</p>
+<p>1 Register webhook in <code>argo-rollouts-notification-configmap</code> ConfigMap:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
 <span class="nt">metadata</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;config-map-name&gt;</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">argo-rollouts-notification-configmap</span>
 <span class="nt">data</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">service.webhook.&lt;webhook-name&gt;</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
 <span class="w">    </span><span class="no">url: https://&lt;hostname&gt;/&lt;optional-path&gt;</span>
@@ -3488,7 +3490,7 @@ Using Webhook you might trigger a Jenkins job, update Github commit status.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
 <span class="nt">metadata</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;config-map-name&gt;</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">argo-rollouts-notification-configmap</span>
 <span class="nt">data</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">template.github-commit-status</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
 <span class="w">    </span><span class="no">webhook:</span>
@@ -3509,11 +3511,11 @@ Using Webhook you might trigger a Jenkins job, update Github commit status.</p>
 <span class="w">    </span><span class="nt">notifications.argoproj.io/subscribe.&lt;trigger-name&gt;.&lt;webhook-name&gt;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
 </code></pre></div>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
-<h3 id="set-github-commit-status">Set Github commit status<a class="headerlink" href="#set-github-commit-status" title="Permanent link">&para;</a></h3>
+<h3 id="set-github-commit-status">Set GitHub commit status<a class="headerlink" href="#set-github-commit-status" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
 <span class="nt">metadata</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;config-map-name&gt;</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">argo-rollouts-notification-configmap</span>
 <span class="nt">data</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">service.webhook.github</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
 <span class="w">    </span><span class="no">url: https://api.github.com</span>
@@ -3525,7 +3527,7 @@ Using Webhook you might trigger a Jenkins job, update Github commit status.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
 <span class="nt">metadata</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;config-map-name&gt;</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">argo-rollouts-notification-configmap</span>
 <span class="nt">data</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">service.webhook.github</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
 <span class="w">    </span><span class="no">url: https://api.github.com</span>
@@ -3553,7 +3555,7 @@ Using Webhook you might trigger a Jenkins job, update Github commit status.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
 <span class="nt">metadata</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;config-map-name&gt;</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">argo-rollouts-notification-configmap</span>
 <span class="nt">data</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">service.webhook.jenkins</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
 <span class="w">    </span><span class="no">url: http://&lt;jenkins-host&gt;/job/&lt;job-name&gt;/build?token=&lt;job-secret&gt;</span>
@@ -3567,7 +3569,7 @@ Using Webhook you might trigger a Jenkins job, update Github commit status.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
 <span class="nt">metadata</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;config-map-name&gt;</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">argo-rollouts-notification-configmap</span>
 <span class="nt">data</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">service.webhook.form</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
 <span class="w">    </span><span class="no">url: https://form.example.com</span>
@@ -3585,7 +3587,7 @@ Using Webhook you might trigger a Jenkins job, update Github commit status.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
 <span class="nt">metadata</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;config-map-name&gt;</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">argo-rollouts-notification-configmap</span>
 <span class="nt">data</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">service.webhook.slack_webhook</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
 <span class="w">    </span><span class="no">url: https://hooks.slack.com/services/xxxxx</span>
@@ -3663,10 +3665,10 @@ Using Webhook you might trigger a Jenkins job, update Github commit status.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
       
         <script src="../../../assets/versions.js"></script>
       
